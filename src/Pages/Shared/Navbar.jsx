@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = ({ loggedIn, userProfilePicture }) => {
   const options = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink className={({isActive})=> isActive? 'text-primary font-bold' : 'text-black'} to="/">Home</NavLink>
       </li>
       <li>
         <Link to="/instructors">Instructors</Link>
@@ -35,7 +35,7 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
   );
 
   return (
-    <nav className="navbar bg-black fixed z-10 bg-opacity-0 container text-white">
+    <nav className="navbar bg-black md:fixed sticky z-10 bg-opacity-0 container text-white">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
