@@ -4,7 +4,7 @@ import { FaInstagramSquare, FaLinkedin } from "react-icons/fa";
 import { MdLocationOn, MdOutlineMailOutline } from "react-icons/md";
 const Footer = () => {
   return (
-    <footer className="footer p-10 bg-base-200 text-base-content">
+    <footer className="footer p-10 bg-[#111827] text-base-content">
       <div className="flex items-center mb-4">
         <h2 className="text-xl text-primary font-black">
           CampSporty <br />

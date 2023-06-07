@@ -1,10 +1,17 @@
 import { Link, NavLink } from "react-router-dom";
-
+import './Navbar.css'
 const Navbar = ({ loggedIn, userProfilePicture }) => {
   const options = (
     <>
       <li>
-        <NavLink className={({isActive})=> isActive? 'text-primary font-bold' : 'text-black'} to="/">Home</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-primary font-bold" : "text-black"
+          }
+          to="/"
+        >
+          Home
+        </NavLink>
       </li>
       <li>
         <Link to="/instructors">Instructors</Link>
@@ -26,11 +33,7 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
           </li>
         </>
       )}
-      {!loggedIn && (
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-      )}
+      
     </>
   );
 
@@ -61,14 +64,22 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
             {options}
           </ul>
         </div>
-        <Link to="/" className="lg:text-xl font-raleway text-primary font-black">
+        <Link
+          to="/"
+          className="lg:text-xl font-raleway text-primary font-black"
+        >
           CampSporty
           <br />
           <span className="text-sm font-bold">Sports Academy</span>
         </Link>
       </div>
-      <div className="navbar-end hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-black">{options}</ul>
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1 text-black font-semibold">{options}</ul>
+      </div>
+      <div className="navbar-end">
+        {!loggedIn && (
+          <Link to={"/login"} className="btn btn-accent normal-case btn-sm">Login</Link>
+        )}
       </div>
     </nav>
   );
