@@ -59,7 +59,7 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[#15151580] rounded-box w-52"
+            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[#111827] rounded-box w-52"
           >
             {options}
           </ul>
@@ -74,11 +74,15 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-black font-semibold">{options}</ul>
+        <ul className="menu menu-horizontal px-1 text-black font-semibold">
+          {options}
+        </ul>
       </div>
       <div className="navbar-end">
         {!loggedIn && (
-          <Link to={"/login"} className="btn btn-accent normal-case btn-sm">Login</Link>
+          <Link to={"/login"} className="btn btn-accent normal-case btn-sm">
+            Login
+          </Link>
         )}
       </div>
     </nav>
