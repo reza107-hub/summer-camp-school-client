@@ -145,3 +145,18 @@
   line-height: 1rem;
   color: rgba(156, 163, 175, 1);
 }
+
+.password-input {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(156, 163, 175, 1);
+  cursor: pointer;
+}
