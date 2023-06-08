@@ -1,12 +1,13 @@
 import { Helmet } from "react-helmet-async";
+import TopSlider from "../TopSlider/TopSlider";
 
 const Home = () => {
   return (
-    <div className="pt-14">
+    <div>
       <Helmet>
         <title>CampSporty | Home</title>
       </Helmet>
-      home
+      <TopSlider />
     </div>
   );
 };

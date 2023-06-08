@@ -5,7 +5,7 @@ import Navbar from "./Pages/Shared/Navbar";
 const App = () => {
   return (
     <>
-      <div className="mx-auto container">
+      <div>
         <Navbar
           loggedIn={null}
           userProfilePicture={
