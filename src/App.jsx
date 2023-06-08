@@ -1,17 +1,14 @@
 import { Outlet } from "react-router-dom";
 import Footer from "./Pages/Shared/Footer";
 import Navbar from "./Pages/Shared/Navbar";
+import useAuth from "./Hooks/useAuth";
 
 const App = () => {
+  const {user} = useAuth()
   return (
     <>
       <div>
-        <Navbar
-          loggedIn={null}
-          userProfilePicture={
-            "https://i.ibb.co/6cMVyxm/In-Shot-20211104-190909311.png"
-          }
-        />
+        <Navbar loggedIn={user} userProfilePicture={user?.photoURL} />
       </div>
       <Outlet />
       <Footer />

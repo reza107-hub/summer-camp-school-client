@@ -2,10 +2,14 @@ import { Link } from "react-router-dom";
 import "./SignUp.css";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import useAuth from "../../Hooks/useAuth";
+const img_hosting_token = import.meta.env.VITE_imgbb;
 
 const SignUp = () => {
+  const { createUser, updateUserProfile } = useAuth();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -21,7 +25,30 @@ const SignUp = () => {
     formState: { errors },
     watch,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    const formData = new FormData();
+    formData.append("image", data.photo[0]);
+
+    fetch(img_hosting_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgResponse) => {
+        if (imgResponse.success) {
+          const imgURL = imgResponse.data.display_url;
+          createUser(data.email, data.password)
+            .then((result) => {
+              console.log(result.user);
+              updateUserProfile(data.name, imgURL);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      });
+  };
 
   const password = watch("password");
   const confirmPassword = watch("confirmPassword");
