@@ -3,7 +3,7 @@ import TestimonialsSlider from "./TestimonialsSlider";
 
 const Testimonials = () => {
   return (
-    <section className="mt-28">
+    <section className="my-28">
       <SectionTitle
         heading={"Testimonials"}
         subHeading={"WHAT PEOPLE SAY"}

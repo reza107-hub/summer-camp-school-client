@@ -1,4 +1,4 @@
-import Card from "../../../Components/Cards/Card";
+import InstructorCards from "../../../Components/InstractorCards/InstractorCards";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 const PopularClasses = () => {
   return (
@@ -9,7 +9,7 @@ const PopularClasses = () => {
       ></SectionTitle>
       <div className="mt-16 flex flex-col justify-center items-center md:grid md:grid-cols-3 container mx-auto gap-10">
         {/* TODO: showing this with number of students of this corse who enrolled */}
-        <Card />
+        <InstructorCards />
       </div>
     </section>
   );
