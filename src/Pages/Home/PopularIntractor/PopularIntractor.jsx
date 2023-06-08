@@ -2,6 +2,7 @@ import InstructorCards from "../../../Components/InstractorCards/InstractorCards
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 
 const PopularIntractor = () => {
+  
   return (
     <section className="container mx-auto">
       <SectionTitle

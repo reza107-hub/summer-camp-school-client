@@ -1,0 +1,62 @@
+[
+  {
+    "_id": "1",
+    "courseName": "Basketball Training",
+    "courseImage": "https://res.cloudinary.com/ourkids/image/upload/w_500,c_scale,q_auto,f_auto/v1623424567/camp/session/16482_session.jpg",
+    "instructorName": "John Smith",
+    "instructorId": "123",
+    "availableSeats": 15,
+    "price": 50,
+    "enrolledStudents": 8
+  },
+  {
+    "_id": "2",
+    "courseName": "Soccer Skills",
+    "courseImage": "https://thumbs.dreamstime.com/z/child-running-soccer-ball-training-cones-european-football-sports-summer-camp-junior-level-athletes-kid-grass-188079548.jpg",
+    "instructorName": "Sarah Johnson",
+    "instructorId": "456",
+    "availableSeats": 20,
+    "price": 40,
+    "enrolledStudents": 5
+  },
+  {
+    "_id": "3",
+    "courseName": "Swimming Lessons",
+    "courseImage": "https://cedarwoodschool.com/portals/0/happy-swim-intructor-in-water.jpg",
+    "instructorName": "Michael Davis",
+    "instructorId": "789",
+    "availableSeats": 13,
+    "price": 60,
+    "enrolledStudents": 7
+  },
+  {
+    "_id": "4",
+    "courseName": "Tennis Workshop",
+    "courseImage": "https://media.istockphoto.com/id/1421309871/photo/tennis-coach-teaching-group-of-children-on-a-court-during-exercise-training-or-workout-to.jpg?s=612x612&w=0&k=20&c=fgvWYv88FpLYj8nRA9RvVZsjBKuZnDbswThojRr78Oc=",
+    "instructorName": "Emily Wilson",
+    "instructorId": "987",
+    "availableSeats": 17,
+    "price": 35,
+    "enrolledStudents": 2
+  },
+  {
+    "_id": "5",
+    "courseName": "Gymnastics Training",
+    "courseImage": "https://www.aviatorsports.com/wp-content/uploads/2019/10/Girls-Gymnastics-Classes.jpg?x74411",
+    "instructorName": "David Lee",
+    "instructorId": "654",
+    "availableSeats": 0,
+    "price": 55,
+    "enrolledStudents": 13
+  },
+  {
+    "_id": "6",
+    "courseName": "Volleyball Camp",
+    "courseImage": "https://www.imgacademy.com/sites/default/files/volleyball-camp-tactics.jpg",
+    "instructorName": "Jennifer Brown",
+    "instructorId": "321",
+    "availableSeats": 25,
+    "price": 30,
+    "enrolledStudents": 10
+  }
+]
