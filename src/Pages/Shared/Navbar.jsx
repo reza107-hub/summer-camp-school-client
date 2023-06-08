@@ -36,7 +36,7 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
   );
 
   return (
-    <nav className="navbar bg-black fixed z-10 bg-opacity-30 text-white">
+    <nav className="navbar bg-white fixed z-10 text-black">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -57,26 +57,26 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[#111827] rounded-box w-52"
+            className="menu menu-compact dropdown-content mt-3 p-2 shadow text-white bg-[#111827] rounded-box w-52"
           >
             {options}
           </ul>
         </div>
         <Link
           to="/"
-          className="lg:text-xl font-raleway text-white font-black"
+          className="lg:text-xl font-raleway text-primary font-black"
         >
           CampSporty
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-white font-bold">
+        <ul className="menu menu-horizontal px-1 text-black font-bold">
           {options}
         </ul>
       </div>
       <div className="navbar-end">
         {!loggedIn && (
-          <Link to={"/login"} className="btn btn-outline text-white font-bold normal-case btn-sm">
+          <Link to={"/login"} className="btn btn-outline text-black font-bold normal-case btn-sm">
             Login
           </Link>
         )}
