@@ -5,15 +5,16 @@ const Dashboard = () => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center">
+      <div className="drawer-content flex flex-col items-center justify-center space-y-8">
         {/* Page content here */}
-        <SelectedClass />
+
         <label
           htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden"
+          className="btn btn-primary btn-sm btn-outline drawer-button lg:hidden absolute left-0 top-0"
         >
-          Open drawer
+          Open Menu
         </label>
+        <SelectedClass />
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
