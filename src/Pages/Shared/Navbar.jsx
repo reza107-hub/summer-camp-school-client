@@ -26,7 +26,14 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
       {loggedIn && (
         <>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-accent font-bold" : ""
+              }
+              to="/dashboard"
+            >
+              Dashboard
+            </NavLink>
           </li>
         </>
       )}

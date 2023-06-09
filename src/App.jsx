@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import Footer from "./Pages/Shared/Footer";
 import Navbar from "./Pages/Shared/Navbar";
 import useAuth from "./Hooks/useAuth";
@@ -12,6 +12,7 @@ const App = () => {
       </div>
       <Outlet />
       <Footer />
+      <ScrollRestoration/>
     </>
   );
 };

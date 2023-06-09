@@ -6,6 +6,7 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoutes";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import SelectedClass from "../Pages/SelectedClass/SelectedClass";
 
 export const router = createBrowserRouter([
   {
@@ -34,5 +35,11 @@ export const router = createBrowserRouter([
         <Dashboard />
       </PrivateRoute>
     ),
+    children: [
+      {
+        path: "/dashboard",
+        element: <SelectedClass />,
+      },
+    ],
   },
 ]);
