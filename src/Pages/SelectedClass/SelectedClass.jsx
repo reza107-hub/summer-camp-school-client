@@ -1,12 +1,11 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import axios from "axios";
 
 const SelectedClass = () => {
   const { user } = useAuth();
-  const queryClient = useQueryClient();
 
-  const { data: selectedCourses = [] } = useQuery({
+  const { data: selectedCourses = [], refetch } = useQuery({
     queryKey: ["selectedCourses"],
     queryFn: async () => {
       const res = await fetch(
@@ -24,16 +23,18 @@ const SelectedClass = () => {
     },
   });
 
-  const handleDelete = async (courseId) => {
-    await axios.delete(`http://localhost:5000/selectedcourse/${courseId}`);
-    queryClient.invalidateQueries("selectedCourses");
+  const handleDelete = async(Id) => {
+    console.log(Id);
+    const res = await axios.delete(`http://localhost:5000/selectedcourse/${Id}`);
+    console.log(res);
+    refetch();
   };
 
   return (
     <div className="overflow-x-auto">
       <table className="table">
         <thead>
-          <tr className="text-black">
+          <tr className="text-black font-bold text-xl">
             <th>Sl. no</th>
             <th>Class</th>
             <th>Instructor Name</th>
