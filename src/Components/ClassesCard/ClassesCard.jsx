@@ -1,18 +1,20 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import useAuth from "../../Hooks/useAuth";
 import "./ClassesCard.css";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../Hooks/useAuth";
 
 const ClassesCard = ({ course }) => {
   const { user } = useAuth();
-
   const { data: selectedCourses = [], refetch } = useQuery({
     queryKey: ["selectedCourses"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/selectedcourse");
+      const res = await fetch(
+        `http://localhost:5000/selectedcourse?email=${user?.email}`
+      );
       return res.json();
     },
+    enabled: !!user,
   });
 
   const handleSelect = (course) => {
@@ -26,11 +28,11 @@ const ClassesCard = ({ course }) => {
     }
 
     console.log(course);
+    course.email = user?.email;
 
     axios
-      .post("http://localhost:5000/selectedcourse", course)
+      .post(`http://localhost:5000/selectedcourse`, course)
       .then((response) => {
-        refetch()
         console.log(response.data);
         // Show success message to the user
         Swal.fire({
@@ -39,13 +41,7 @@ const ClassesCard = ({ course }) => {
           icon: "success",
           confirmButtonText: "OK",
         });
-        // Disable the select button
-        const selectButton = document.getElementById(
-          `selectButton-${course._id}`
-        );
-        if (selectButton) {
-          selectButton.disabled = true;
-        }
+        refetch();
       })
       .catch((error) => {
         // Handle any errors that occurred during the request
@@ -60,12 +56,12 @@ const ClassesCard = ({ course }) => {
       });
   };
 
-
-
-  const isCourseSelected = selectedCourses.some(
-    (selectedCourse) => selectedCourse._id === course._id
-  );
-  console.log(isCourseSelected);
+  const isCourseSelected = selectedCourses.some((selectedCourse) => {
+    return (
+      selectedCourse.courseId === course._id &&
+      selectedCourse.email === user?.email
+    );
+  });
 
   return (
     <div
@@ -92,7 +88,6 @@ const ClassesCard = ({ course }) => {
         <p className="text-gray-700">Price: ${course.price}</p>
 
         <button
-          id={`selectButton-${course._id}`}
           onClick={() => handleSelect(course)}
           className={`${
             course?.availableSeats === 0 || isCourseSelected
