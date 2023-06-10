@@ -17,6 +17,17 @@ const ClassesCard = ({ course }) => {
     enabled: !!user,
   });
 
+  const { data: enrolledCourse = [] } = useQuery({
+    queryKey: ["enrolledCourse"],
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:5000/payments?email=${user?.email}`
+      );
+      return res.json();
+    },
+    enabled: !!user,
+  });
+  console.log(enrolledCourse);
   const handleSelect = (course) => {
     if (!user) {
       Swal.fire({
@@ -62,6 +73,12 @@ const ClassesCard = ({ course }) => {
       selectedCourse.email === user?.email
     );
   });
+  const isCourseEnrolled = enrolledCourse.some((selectedCourse) => {
+    return (
+      selectedCourse.courseId === course._id &&
+      selectedCourse.email === user?.email
+    );
+  });
 
   return (
     <div
@@ -90,12 +107,12 @@ const ClassesCard = ({ course }) => {
         <button
           onClick={() => handleSelect(course)}
           className={`${
-            course?.availableSeats === 0 || isCourseSelected
-              ? "btn-disabled"
+            course?.availableSeats === 0 || isCourseSelected || isCourseEnrolled
+              ? "btn-disabled text-gray-400"
               : "btn btn-primary btn-outline btn-sm mt-2"
           }`}
         >
-          Select
+          {isCourseEnrolled? 'Enrolled':'Select'}
         </button>
       </div>
     </div>
