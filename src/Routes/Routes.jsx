@@ -7,6 +7,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoutes";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import SelectedClass from "../Pages/SelectedClass/SelectedClass";
+import PaymentPage from "../Pages/PaymentPage/PaymentPage";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <SelectedClass />,
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: <PaymentPage />,
       },
     ],
   },

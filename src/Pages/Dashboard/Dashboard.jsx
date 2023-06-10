@@ -1,5 +1,4 @@
-import {  Link, NavLink } from "react-router-dom";
-import SelectedClass from "../SelectedClass/SelectedClass";
+import {  Link, NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -14,7 +13,7 @@ const Dashboard = () => {
         >
           Open Menu
         </label>
-        <SelectedClass />
+        <Outlet></Outlet>
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>

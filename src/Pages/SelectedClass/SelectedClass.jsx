@@ -1,32 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../Hooks/useAuth";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import useClasses from "../../Hooks/useClasses";
 
 const SelectedClass = () => {
-  const { user } = useAuth();
-
-  const { data: selectedCourses = [], refetch } = useQuery({
-    queryKey: ["selectedCourses"],
-    queryFn: async () => {
-      const res = await fetch(
-        `http://localhost:5000/selectedcourse?email=${user?.email}`
-      );
-      return res.json();
-    },
-  });
-
-  const { data: courses = [] } = useQuery({
-    queryKey: ["courses"],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/courses`);
-      return res.json();
-    },
-  });
+    const [selectedCourses, refetch, user] = useClasses();
+    console.log(selectedCourses);
 
   const handleDelete = async(Id) => {
     console.log(Id);
-    const res = await axios.delete(`http://localhost:5000/selectedcourse/${Id}`);
-    console.log(res);
+    const res = await axios.delete(
+      `http://localhost:5000/selectedcourse/${Id}?email=${user?.email}`
+    );
+    console.log(res.data);
     refetch();
   };
 
@@ -44,48 +29,50 @@ const SelectedClass = () => {
           </tr>
         </thead>
         <tbody>
-          {selectedCourses.map((selectedCourse, index) => {
-            const course = courses.find(
-              (course) => course._id === selectedCourse.courseId
-            );
-            return (
-              <tr key={selectedCourse._id}>
-                <td>
-                  <div className="flex items-center space-x-3">
-                    <div className="">
-                      <div className="w-12 h-12">{index + 1}</div>
+          {selectedCourses.map((selectedCourse, index) => (
+            <tr key={selectedCourse?._id}>
+              <td>
+                <div className="flex items-center space-x-3">
+                  <div className="">
+                    <div className="w-12 h-12">{index + 1}</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div className="flex items-center space-x-3">
+                  <div className="avatar">
+                    <div className="mask mask-squircle w-12 h-12">
+                      <img
+                        src={selectedCourse?.courseImage}
+                        alt={selectedCourse?.courseName}
+                      />
                     </div>
                   </div>
-                </td>
-                <td>
-                  <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src={course?.courseImage}
-                          alt={course?.courseName}
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="font-bold">{course?.courseName}</div>
+                  <div>
+                    <div className="font-bold">
+                      {selectedCourse?.courseName}
                     </div>
                   </div>
-                </td>
-                <td>{course?.instructorName}</td>
-                <td>{course?.price}</td>
-                <th>
+                </div>
+              </td>
+              <td>{selectedCourse?.instructorName}</td>
+              <td>{selectedCourse?.price}</td>
+              <th>
+                <Link to={`/dashboard/payment/${selectedCourse?.courseId}`}>
                   <button className="btn btn-ghost btn-xs">Pay</button>
-                  <button
-                    className="btn btn-ghost btn-xs"
-                    onClick={() => handleDelete(selectedCourse._id)}
-                  >
-                    Delete
-                  </button>
-                </th>
-              </tr>
-            );
-          })}
+                </Link>
+
+                <button
+                  className="btn btn-ghost btn-xs"
+                  onClick={() =>
+                    handleDelete(selectedCourse?.courseId, user?.email)
+                  }
+                >
+                  Delete
+                </button>
+              </th>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
