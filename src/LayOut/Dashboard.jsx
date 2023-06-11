@@ -1,10 +1,10 @@
-import {  Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center space-y-8">
+      <div className="drawer-content flex flex-col items-center space-y-8">
         {/* Page content here */}
 
         <label
@@ -25,6 +25,7 @@ const Dashboard = () => {
           <div className="divider"></div>
           <li>
             <NavLink
+            end
               className={({ isActive }) =>
                 isActive ? "text-accent font-bold" : ""
               }
@@ -34,7 +35,14 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
-            <a>Sidebar Item 2</a>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-accent font-bold" : ""
+              }
+              to={"/dashboard/enrolledclasses"}
+            >
+              My Enrolled Classes
+            </NavLink>
           </li>
           <div className="divider"></div>
           <li>

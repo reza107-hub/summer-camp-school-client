@@ -2,7 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import "./CheckoutForm.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import useAuth from "../../Hooks/useAuth";
+import useAuth from "../../../Hooks/useAuth";
 const CheckoutForm = ({ price, course }) => {
   const { user } = useAuth();
   const stripe = useStripe();
@@ -11,7 +11,6 @@ const CheckoutForm = ({ price, course }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
-
   useEffect(() => {
     if (price > 0) {
       axios
@@ -72,14 +71,18 @@ const CheckoutForm = ({ price, course }) => {
         item: course?._id,
         courseName: course?.courseName,
         courseId: course?.courseId,
+        courseImage: course?.courseImage,
+        instructorName: course?.instructorName,
+        instructorId: course?.instructorId,
+        availableSeats: course?.availableSeats,
+        enrolledStudents: course?.enrolledStudents,
         date: new Date(),
       };
-      axios.post("http://localhost:5000/payments",payment)
-      .then(res=>{
+      axios.post("http://localhost:5000/payments", payment).then((res) => {
         if (res.data.insertedId) {
-          alert('Payment Successful')
+          alert("Payment Successful");
         }
-      })
+      });
     }
   };
   return (
