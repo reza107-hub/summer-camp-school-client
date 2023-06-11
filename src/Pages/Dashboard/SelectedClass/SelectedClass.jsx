@@ -18,7 +18,7 @@ const SelectedClass = () => {
 
   return (
     <>
-    <SectionTitle heading={'Selected Classes'}></SectionTitle>
+      <SectionTitle heading={"Selected Classes"}></SectionTitle>
       <div className="overflow-x-auto">
         <table className="table">
           <thead>
@@ -34,13 +34,7 @@ const SelectedClass = () => {
           <tbody>
             {selectedCourses.map((selectedCourse, index) => (
               <tr key={selectedCourse?._id}>
-                <td>
-                  <div className="flex items-center space-x-3">
-                    <div className="">
-                      <div className="w-12 h-12">{index + 1}</div>
-                    </div>
-                  </div>
-                </td>
+                <td>{index + 1}</td>
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">

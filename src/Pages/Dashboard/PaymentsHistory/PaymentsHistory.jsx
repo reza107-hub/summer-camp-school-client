@@ -1,35 +1,34 @@
 import { useQuery } from "@tanstack/react-query";
-import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useAuth from "../../../Hooks/useAuth";
+import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 
-const EnrolledClasses = () => {
-    const {user} = useAuth()
-    const { data: enrolledCourse = [] } = useQuery({
-      queryKey: ["enrolledCourse"],
-      queryFn: async () => {
-        const res = await fetch(
-          `http://localhost:5000/payments?email=${user?.email}`
-        );
-        return res.json();
-      },
-    });
+const PaymentsHistory = () => {
+  const { user } = useAuth();
+  const { data: enrolledCourse = [] } = useQuery({
+    queryKey: ["enrolledCourse"],
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:5000/payments?email=${user?.email}`
+      );
+      return res.json();
+    },
+  });
   return (
     <div>
-      <SectionTitle heading={"Enrolled Classes"}></SectionTitle>
+      <SectionTitle heading={"Payment History"}></SectionTitle>
       <div className="overflow-x-auto">
         <table className="table">
           <thead>
             <tr className="text-black font-bold text-xl">
-              <th>Sl. no</th>
               <th>Class</th>
               <th>Instructor Name</th>
               <th>Price</th>
+              <th>Date</th>
             </tr>
           </thead>
           <tbody>
-            {enrolledCourse?.map((course, index) => (
+            {enrolledCourse?.map((course) => (
               <tr key={course?._id}>
-                <td>{index + 1}</td>
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
@@ -47,6 +46,13 @@ const EnrolledClasses = () => {
                 </td>
                 <td>{course?.instructorName}</td>
                 <td>{course?.price}</td>
+                <td>
+                  {new Date(course?.date).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -56,4 +62,4 @@ const EnrolledClasses = () => {
   );
 };
 
-export default EnrolledClasses;
+export default PaymentsHistory;

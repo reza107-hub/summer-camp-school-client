@@ -25,7 +25,7 @@ const Dashboard = () => {
           <div className="divider"></div>
           <li>
             <NavLink
-            end
+              end
               className={({ isActive }) =>
                 isActive ? "text-accent font-bold" : ""
               }
@@ -42,6 +42,16 @@ const Dashboard = () => {
               to={"/dashboard/enrolledclasses"}
             >
               My Enrolled Classes
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-accent font-bold" : ""
+              }
+              to={"/dashboard/payment-history"}
+            >
+              Payment History
             </NavLink>
           </li>
           <div className="divider"></div>
