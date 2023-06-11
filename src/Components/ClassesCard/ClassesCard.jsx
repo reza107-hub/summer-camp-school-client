@@ -1,6 +1,5 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import "./ClassesCard.css";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 

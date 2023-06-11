@@ -153,10 +153,17 @@
 .password-toggle {
   position: absolute;
   top: 50%;
-  right: 1rem;
+  right: 1.75rem; /* Adjust the value to position the button outside the password button */
   transform: translateY(-50%);
   background: none;
   border: none;
   color: rgba(156, 163, 175, 1);
   cursor: pointer;
+  font-size: 0.75rem; /* Add the desired font size */
+  transition: transform 0.3s ease; /* Add transition for smooth animation */
 }
+
+.password-toggle:hover {
+  transform: translate(0.25rem, -50%); /* Move the button slightly to the right when hovered */
+}
+
