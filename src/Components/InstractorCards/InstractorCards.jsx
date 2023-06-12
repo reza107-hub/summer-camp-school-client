@@ -1,6 +1,5 @@
 import "./InstractorCards.css";
 const InstructorCards = ({ instructor }) => {
-  console.log(instructor);
   return (
     <div>
       <article className="card">

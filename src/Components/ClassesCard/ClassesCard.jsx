@@ -2,9 +2,11 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
+import useAdmin from "../../Hooks/useAdmin";
 
 const ClassesCard = ({ course }) => {
   const { user } = useAuth();
+  const [isAdmin] = useAdmin();
   const { data: selectedCourses = [], refetch } = useQuery({
     queryKey: ["selectedCourses"],
     queryFn: async () => {
@@ -26,7 +28,6 @@ const ClassesCard = ({ course }) => {
     },
     enabled: !!user,
   });
-  console.log(enrolledCourse);
   const handleSelect = (course) => {
     if (!user) {
       Swal.fire({
@@ -36,8 +37,6 @@ const ClassesCard = ({ course }) => {
       });
       return;
     }
-
-    console.log(course);
     course.email = user?.email;
 
     axios
@@ -106,12 +105,15 @@ const ClassesCard = ({ course }) => {
         <button
           onClick={() => handleSelect(course)}
           className={`${
-            course?.availableSeats === 0 || isCourseSelected || isCourseEnrolled
+            course?.availableSeats === 0 ||
+            isCourseSelected ||
+            isCourseEnrolled ||
+            isAdmin?.admin
               ? "btn-disabled text-gray-400"
               : "btn btn-primary btn-outline btn-sm mt-2"
           }`}
         >
-          {isCourseEnrolled? 'Enrolled':'Select'}
+          {isCourseEnrolled ? "Enrolled" : "Select"}
         </button>
       </div>
     </div>

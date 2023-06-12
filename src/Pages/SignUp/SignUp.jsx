@@ -3,6 +3,7 @@ import "./SignUp.css";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
+import axios from "axios";
 const img_hosting_token = import.meta.env.VITE_imgbb;
 
 const SignUp = () => {
@@ -18,6 +19,23 @@ const SignUp = () => {
   const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
+  const handleImage = async (data) => {
+    const formData = new FormData();
+    formData.append("image", data);
+
+    try {
+      const res = await fetch(img_hosting_url, {
+        method: "POST",
+        body: formData,
+      });
+      const imgResponse = await res.json();
+      console.log(imgResponse.data);
+      return imgResponse.data.url;
+    } catch (error) {
+      console.log(error);
+      return {};
+    }
+  };
 
   const {
     register,
@@ -25,29 +43,28 @@ const SignUp = () => {
     formState: { errors },
     watch,
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    const formData = new FormData();
-    formData.append("image", data.photo[0]);
 
-    fetch(img_hosting_url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imgResponse) => {
-        if (imgResponse.success) {
-          const imgURL = imgResponse.data.display_url;
-          createUser(data.email, data.password)
-            .then((result) => {
-              console.log(result.user);
-              updateUserProfile(data.name, imgURL);
-            })
-            .catch((err) => {
-              console.log(err);
+  const onSubmit = async (data) => {
+    console.log(data);
+    const imgResponse = await handleImage(data.photo[0]);
+    console.log(imgResponse);
+    if (imgResponse) {
+      createUser(data.email, data.password)
+        .then((result) => {
+          console.log(result.user);
+          updateUserProfile(data.name, imgResponse).then(() => {
+            const saveUser = { name: data.name, email: data.email };
+            axios.post("http://localhost:5000/users", saveUser).then((res) => {
+              if (res.data.insertedId) {
+                // TODO
+              }
             });
-        }
-      });
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const password = watch("password");

@@ -1,8 +1,10 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
   const isInstructor = 0;
-  const isAdmin = 0;
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin?.admin);
 
   return (
     <div className="drawer lg:drawer-open">
@@ -25,7 +27,7 @@ const Dashboard = () => {
             Dashboard
           </li>
           <div className="divider"></div>
-          {isAdmin ? (
+          {isAdmin?.admin ? (
             <>
               <li>
                 <NavLink
@@ -81,9 +83,9 @@ const Dashboard = () => {
                   className={({ isActive }) =>
                     isActive ? "text-accent font-bold" : ""
                   }
-                  to={"/dashboard"}
+                  to={"/dashboard/selectedclassed"}
                 >
-                  Dashboard Home
+                  My Selected Classes
                 </NavLink>
               </li>
               <li>
