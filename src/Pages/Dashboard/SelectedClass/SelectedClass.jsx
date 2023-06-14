@@ -5,15 +5,14 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 
 const SelectedClass = () => {
   const [selectedCourses, refetch, user] = useClasses();
-  console.log(selectedCourses);
 
   const handleDelete = async (Id) => {
-    console.log(Id);
     const res = await axios.delete(
       `http://localhost:5000/selectedcourse/${Id}?email=${user?.email}`
     );
-    console.log(res.data);
+
     refetch();
+    return res.data;
   };
 
   return (

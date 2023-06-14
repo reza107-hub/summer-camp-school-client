@@ -3,10 +3,12 @@ import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAdmin from "../../Hooks/useAdmin";
+import useInstructor from "../../Hooks/useInstructor";
 
 const ClassesCard = ({ course }) => {
   const { user } = useAuth();
   const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
   const { data: selectedCourses = [], refetch } = useQuery({
     queryKey: ["selectedCourses"],
     queryFn: async () => {
@@ -42,8 +44,7 @@ const ClassesCard = ({ course }) => {
     axios
       .post(`http://localhost:5000/selectedcourse`, course)
       .then((response) => {
-        console.log(response.data);
-        // Show success message to the user
+        console.log(response);
         Swal.fire({
           title: "Course Selected",
           text: "You have successfully selected the course.",
@@ -97,9 +98,6 @@ const ClassesCard = ({ course }) => {
         <p className="text-gray-700">
           Available Seats: {course?.availableSeats}
         </p>
-        <p className="text-gray-700">
-          Enrolled Students: {course?.enrolledStudents}
-        </p>
         <p className="text-gray-700">Price: ${course.price}</p>
 
         <button
@@ -108,7 +106,8 @@ const ClassesCard = ({ course }) => {
             course?.availableSeats === 0 ||
             isCourseSelected ||
             isCourseEnrolled ||
-            isAdmin?.admin
+            isAdmin?.admin ||
+            isInstructor?.instructor
               ? "btn-disabled text-gray-400"
               : "btn btn-primary btn-outline btn-sm mt-2"
           }`}

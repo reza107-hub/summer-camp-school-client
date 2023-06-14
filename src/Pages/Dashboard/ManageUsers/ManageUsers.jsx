@@ -3,7 +3,7 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {
-  const { data: users = [],refetch } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/users");
@@ -11,25 +11,43 @@ const ManageUsers = () => {
     },
   });
 
-const handleMakeAdmin = (user) => {
-  fetch(`http://localhost:5000/users/admin/${user._id}`, {
-    method: "PATCH",
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      if (data.modifiedCount) {
-        refetch();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `${user.name} is an Admin Now!`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
-};
+  const handleMakeAdmin = (user) => {
+    fetch(`http://localhost:5000/users/admin/${user._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${user.name} is an Admin Now!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+
+  const handleMakeInstructor = (user) => {
+    fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${user.name} is an instructor Now!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
 
   return (
     <div>
@@ -51,14 +69,32 @@ const handleMakeAdmin = (user) => {
                 <td>{user?.email}</td>
                 <td>{user?.name}</td>
                 <td>
+                  {user.role === "instructor" ? (
+                    "instructor"
+                  ) : (
+                    <button
+                      disabled={user.role}
+                      onClick={() => handleMakeInstructor(user)}
+                      className={`btn btn-outline btn-accent btn-xs border-0 normal-case  text-white ${
+                        user.role ? "btn-disabled" : ""
+                      }`}
+                    >
+                      make <br /> Instructor
+                    </button>
+                  )}
+                </td>
+                <td>
                   {user.role === "admin" ? (
                     "admin"
                   ) : (
                     <button
+                      disabled={user.role}
                       onClick={() => handleMakeAdmin(user)}
-                      className="btn btn-outline btn-accent btn-xs normal-case  text-white"
+                      className={`btn btn-outline btn-accent btn-xs border-0 normal-case  text-white ${
+                        user.role ? "btn-disabled" : ""
+                      }`}
                     >
-                      Admin
+                      Make <br /> Admin
                     </button>
                   )}
                 </td>

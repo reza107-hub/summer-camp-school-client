@@ -1,10 +1,10 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../Hooks/useAdmin";
+import useInstructor from "../Hooks/useInstructor";
 
 const Dashboard = () => {
-  const isInstructor = 0;
+  const [isInstructor] = useInstructor();
   const [isAdmin] = useAdmin();
-  console.log(isAdmin?.admin);
 
   return (
     <div className="drawer lg:drawer-open">
@@ -96,6 +96,16 @@ const Dashboard = () => {
                   to={"/dashboard/enrolledclasses"}
                 >
                   Enrolled Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-accent font-bold" : ""
+                  }
+                  to={"/dashboard/payment-history"}
+                >
+                  Payment History
                 </NavLink>
               </li>
             </>

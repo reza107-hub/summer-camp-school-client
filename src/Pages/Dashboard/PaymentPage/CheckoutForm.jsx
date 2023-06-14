@@ -16,12 +16,10 @@ const CheckoutForm = ({ price, course }) => {
       axios
         .post("http://localhost:5000/create-payment-intent", { price })
         .then((res) => {
-          console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
   }, [price]);
-  console.log("clientSecret", clientSecret);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,7 +33,6 @@ const CheckoutForm = ({ price, course }) => {
     });
 
     if (error) {
-      console.log("error", error);
       setCardError(error.message);
     } else {
       setCardError("");

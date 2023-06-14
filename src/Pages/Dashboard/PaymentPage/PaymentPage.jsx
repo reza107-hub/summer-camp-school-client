@@ -6,11 +6,9 @@ import useClasses from "../../../Hooks/useClasses";
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_key);
 const PaymentPage = () => {
   const { id } = useParams();
-  console.log(id);
   const [selectedCourses] = useClasses();
   const course = selectedCourses.find((sc) => sc?.courseId == id);
   const price = course?.price ? course?.price : 0;
-  console.log(course);
   return (
     <div>
       <Elements stripe={stripePromise}>
