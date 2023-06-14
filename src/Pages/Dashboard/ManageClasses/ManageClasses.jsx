@@ -13,11 +13,24 @@ const ManageClasses = () => {
 
   const handleApprove = (id) => {
     console.log(id);
-    axios.patch(`http://localhost:5000/courses/${id}`).then((res) => {
-      if (res.data.modifiedCount) {
-        alert("status updated");
-      }
-    });
+    axios
+      .patch(`http://localhost:5000/courses/${id}?status=approved`)
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          alert("status updated");
+        }
+      });
+  };
+
+  const handleDenied = (id) => {
+    console.log(id);
+    axios
+      .patch(`http://localhost:5000/courses/${id}?status=denied`)
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          alert("status updated");
+        }
+      });
   };
 
   return (
@@ -66,13 +79,24 @@ const ManageClasses = () => {
                 <td>{course?.status}</td>
                 <td>
                   <button
+                    disabled={
+                      course?.status == "denied" || course?.status == "approved"
+                    }
                     onClick={() => handleApprove(course?._id)}
-                    className="btn btn-accent btn-outline btn-xs border-0"
+                    className={`btn btn-accent btn-outline btn-xs border-0 ${
+                      course?.status == "denied" ? "btn-disabled" : ""
+                    }`}
                   >
                     Approve
                   </button>{" "}
                   <br />
-                  <button className="btn btn-accent btn-outline btn-xs border-0">
+                  <button
+                    disabled={course?.status == "denied"}
+                    onClick={() => handleDenied(course?._id)}
+                    className={`btn btn-accent btn-outline btn-xs border-0 ${
+                      course?.status == "denied" ? "btn-disabled" : ""
+                    }`}
+                  >
                     Deny
                   </button>{" "}
                   <br />
