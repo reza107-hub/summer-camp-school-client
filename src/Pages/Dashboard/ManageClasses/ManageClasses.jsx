@@ -1,8 +1,11 @@
 import axios from "axios";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
+import { useRef, useState } from "react";
 
 const ManageClasses = () => {
+  const feedbackRef = useRef();
+  const [selectedCourseId, setSelectedCourseId] = useState(null);
   const { data: courses = [] } = useQuery({
     queryKey: ["courses"],
     queryFn: async () => {
@@ -23,12 +26,24 @@ const ManageClasses = () => {
   };
 
   const handleDenied = (id) => {
-    console.log(id);
     axios
       .patch(`http://localhost:5000/courses/${id}?status=denied`)
       .then((res) => {
         if (res.data.modifiedCount) {
           alert("status updated");
+        }
+      });
+  };
+
+  const handleFeedBack = (id) => {
+    console.log(id);
+    axios
+      .patch(
+        `http://localhost:5000/courses/${id}?feedback=${feedbackRef.current.value}`
+      )
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          alert("feedback done");
         }
       });
   };
@@ -80,27 +95,34 @@ const ManageClasses = () => {
                 <td>
                   <button
                     disabled={
-                      course?.status == "denied" || course?.status == "approved"
+                      course?.status === "denied" ||
+                      course?.status === "approved"
                     }
                     onClick={() => handleApprove(course?._id)}
                     className={`btn btn-accent btn-outline btn-xs border-0 ${
-                      course?.status == "denied" ? "btn-disabled" : ""
+                      course?.status === "denied" ? "btn-disabled" : ""
                     }`}
                   >
                     Approve
                   </button>{" "}
                   <br />
                   <button
-                    disabled={course?.status == "denied"}
+                    disabled={course?.status === "denied"}
                     onClick={() => handleDenied(course?._id)}
                     className={`btn btn-accent btn-outline btn-xs border-0 ${
-                      course?.status == "denied" ? "btn-disabled" : ""
+                      course?.status === "denied" ? "btn-disabled" : ""
                     }`}
                   >
                     Deny
                   </button>{" "}
                   <br />
-                  <button className="btn btn-accent btn-outline btn-xs border-0">
+                  <button
+                    onClick={() => {
+                      setSelectedCourseId(course?._id);
+                      window.my_modal_5.showModal();
+                    }}
+                    className="btn btn-accent btn-outline btn-xs border-0"
+                  >
                     Feedback
                   </button>
                 </td>
@@ -108,6 +130,36 @@ const ManageClasses = () => {
             ))}
           </tbody>
         </table>
+
+        <dialog
+          id="my_modal_5"
+          className="modal modal-bottom sm:modal-middle bg-white"
+        >
+          <form method="dialog" className="modal-box">
+            <h3 className="font-bold text-lg text-center mb-4">
+              Give Feedback
+            </h3>
+            <textarea
+              ref={feedbackRef}
+              className="textarea w-full"
+              placeholder="Write feedback"
+            ></textarea>
+            <div className="modal-action">
+              {/* if there is a button in the form, it will close the modal */}
+              <button className="btn btn-accent btn-outline btn-xs">
+                Close
+              </button>
+              <button
+                onClick={() =>
+                  handleFeedBack(selectedCourseId ?? selectedCourseId)
+                }
+                className="btn btn-primary btn-outline btn-xs"
+              >
+                Send
+              </button>
+            </div>
+          </form>
+        </dialog>
       </div>
     </>
   );

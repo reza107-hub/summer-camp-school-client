@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "selectedclassed",
+        path: "selectedclasses",
         element: <SelectedClass />,
       },
       {

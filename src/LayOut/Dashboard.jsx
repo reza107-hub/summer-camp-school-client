@@ -51,7 +51,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
             </>
-          ) : isInstructor ? (
+          ) : isInstructor.instructor ? (
             <>
               <li>
                 <NavLink
@@ -83,7 +83,7 @@ const Dashboard = () => {
                   className={({ isActive }) =>
                     isActive ? "text-accent font-bold" : ""
                   }
-                  to={"/dashboard/selectedclassed"}
+                  to={"/dashboard/selectedclasses"}
                 >
                   My Selected Classes
                 </NavLink>

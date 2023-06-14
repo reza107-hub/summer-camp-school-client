@@ -1,10 +1,26 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import useAdmin from "../../Hooks/useAdmin";
+import useInstructor from "../../Hooks/useInstructor";
 const Navbar = ({ loggedIn, userProfilePicture }) => {
   const { logOut } = useAuth();
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
   const handleLogOut = () => {
     logOut();
   };
+  console.log(isAdmin);
+  console.log(isInstructor);
+  const getDashboardLink = () => {
+    if (isAdmin?.admin) {
+      return "/dashboard/manageusers";
+    } else if (isInstructor?.instructor) {
+      return "/dashboard/myclasses";
+    } else {
+      return "/dashboard/selectedclasses";
+    }
+  };
+
   const options = (
     <>
       <li>
@@ -18,10 +34,24 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
         </NavLink>
       </li>
       <li>
-        <Link to="/instructors">Instructors</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-accent font-bold" : ""
+          }
+          to="/instructors"
+        >
+          Instructors
+        </NavLink>
       </li>
       <li>
-        <Link to="/classes">Classes</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-accent font-bold" : ""
+          }
+          to="/classes"
+        >
+          Classes
+        </NavLink>
       </li>
       {loggedIn && (
         <>
@@ -30,7 +60,7 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
               className={({ isActive }) =>
                 isActive ? "text-accent font-bold" : ""
               }
-              to="/dashboard"
+              to={getDashboardLink()}
             >
               Dashboard
             </NavLink>
