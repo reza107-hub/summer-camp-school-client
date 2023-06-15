@@ -8,8 +8,9 @@ const GoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
         const saveUser = {
-          name: result.user.displayName,
-          email: result.user.email,
+          name: result.user?.displayName,
+          email: result.user?.email,
+          image: result.user?.photoURL,
         };
         axios.post("http://localhost:5000/users", saveUser).then((res) => {
           if (res.data.insertedId) {

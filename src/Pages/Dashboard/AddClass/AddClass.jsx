@@ -34,6 +34,7 @@ const AddClass = () => {
     data.status = "pending";
     data.availableSeats = parseFloat(data.availableSeats);
     data.courseImage = imgResponse;
+    data.enrolledStudents = 0;
     console.log(data);
     if (imgResponse) {
       axios.post("http://localhost:5000/courses", data).then((res) => {

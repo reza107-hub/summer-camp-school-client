@@ -19,7 +19,7 @@ const PaymentsHistory = () => {
       <div className="overflow-x-auto">
         <table className="table">
           <thead>
-            <tr className="text-black font-bold text-xl">
+            <tr className="text-black font-bold text-lg">
               <th>Class</th>
               <th>Instructor Name</th>
               <th>Price</th>

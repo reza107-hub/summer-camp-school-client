@@ -98,6 +98,9 @@ const ClassesCard = ({ course }) => {
         <p className="text-gray-700">
           Available Seats: {course?.availableSeats}
         </p>
+        <p className="text-gray-700">
+          Enrolled Students: {course?.enrolledStudents}
+        </p>
         <p className="text-gray-700">Price: ${course.price}</p>
 
         <button

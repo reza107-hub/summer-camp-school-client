@@ -51,7 +51,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
             </>
-          ) : isInstructor.instructor ? (
+          ) : isInstructor?.instructor ? (
             <>
               <li>
                 <NavLink

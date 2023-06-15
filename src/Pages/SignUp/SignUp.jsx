@@ -48,7 +48,11 @@ const SignUp = () => {
     if (imgResponse) {
       createUser(data.email, data.password)
         .then((result) => {
-          const saveUser = { name: data.name, email: data.email };
+          const saveUser = {
+            name: data.name,
+            email: data.email,
+            image: imgResponse,
+          };
           axios.post("http://localhost:5000/users", saveUser).then((res) => {
             if (res.data.insertedId) {
               // TODO

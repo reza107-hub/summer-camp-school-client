@@ -55,7 +55,7 @@ const ManageUsers = () => {
       <div className="overflow-x-auto">
         <table className="table">
           <thead>
-            <tr className="text-black font-bold text-xl">
+            <tr className="text-black font-bold text-lg">
               <th>#</th>
               <th>Email</th>
               <th>name</th>

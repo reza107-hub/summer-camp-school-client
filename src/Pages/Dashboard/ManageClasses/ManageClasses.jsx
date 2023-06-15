@@ -50,11 +50,11 @@ const ManageClasses = () => {
 
   return (
     <>
-      <SectionTitle heading={"Selected Classes"}></SectionTitle>
+      <SectionTitle heading={"Manage Classes"}></SectionTitle>
       <div className="overflow-x-auto">
         <table className="table text-center">
           <thead>
-            <tr className="text-black font-bold text-xl">
+            <tr className="text-black font-bold text-lg">
               <th>Sl. no</th>
               <th>Class</th>
               <th>Instructor</th>
@@ -107,7 +107,10 @@ const ManageClasses = () => {
                   </button>{" "}
                   <br />
                   <button
-                    disabled={course?.status === "denied"}
+                    disabled={
+                      course?.status === "denied" ||
+                      course?.status === "approved"
+                    }
                     onClick={() => handleDenied(course?._id)}
                     className={`btn btn-accent btn-outline btn-xs border-0 ${
                       course?.status === "denied" ? "btn-disabled" : ""
