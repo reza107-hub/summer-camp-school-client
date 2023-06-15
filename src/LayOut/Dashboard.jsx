@@ -1,6 +1,9 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../Hooks/useAdmin";
 import useInstructor from "../Hooks/useInstructor";
+import { FaUsersCog, FaRegAddressBook, FaInfo, FaPlus } from "react-icons/fa";
+import { GrCheckboxSelected } from "react-icons/gr";
+import { MdPayment, MdOutlineWorkHistory } from "react-icons/md";
 
 const Dashboard = () => {
   const [isInstructor] = useInstructor();
@@ -37,7 +40,7 @@ const Dashboard = () => {
                   }
                   to={"/dashboard/manageclasses"}
                 >
-                  Manage Classes
+                  <FaRegAddressBook className="text-white" /> Manage Classes
                 </NavLink>
               </li>
               <li>
@@ -47,7 +50,7 @@ const Dashboard = () => {
                   }
                   to={"/dashboard/manageusers"}
                 >
-                  Manage Users
+                  <FaUsersCog className="text-white" /> Manage Users
                 </NavLink>
               </li>
             </>
@@ -61,7 +64,7 @@ const Dashboard = () => {
                   }
                   to={"/dashboard/addclass"}
                 >
-                  Add a Class
+                  <FaPlus className="text-white"></FaPlus> Add a Class
                 </NavLink>
               </li>
               <li>
@@ -71,7 +74,7 @@ const Dashboard = () => {
                   }
                   to={"/dashboard/myclasses"}
                 >
-                  My Classes
+                  <FaInfo className="text-white"></FaInfo> My Classes
                 </NavLink>
               </li>
             </>
@@ -85,6 +88,7 @@ const Dashboard = () => {
                   }
                   to={"/dashboard/selectedclasses"}
                 >
+                  <GrCheckboxSelected className="bg-white"></GrCheckboxSelected>{" "}
                   My Selected Classes
                 </NavLink>
               </li>
@@ -95,7 +99,7 @@ const Dashboard = () => {
                   }
                   to={"/dashboard/enrolledclasses"}
                 >
-                  Enrolled Classes
+                  <MdPayment className="text-white" /> Enrolled Classes
                 </NavLink>
               </li>
               <li>
@@ -105,7 +109,7 @@ const Dashboard = () => {
                   }
                   to={"/dashboard/payment-history"}
                 >
-                  Payment History
+                  <MdOutlineWorkHistory className="text-white"/> Payment History
                 </NavLink>
               </li>
             </>

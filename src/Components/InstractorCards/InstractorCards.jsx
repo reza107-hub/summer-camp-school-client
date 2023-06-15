@@ -10,9 +10,10 @@ const InstructorCards = ({ instructor }) => {
           <span className="card_title">{instructor?.name}</span>
           <span className="card_subtitle">{instructor?.email}</span>
           <p className="card_description">
-            Lorem ipsum dolor, sit amet expedita exercitationem recusandae aut
-            dolor tempora aperiam itaque possimus at, cupiditate earum, quae
-            repudiandae aspernatur? Labore minus soluta consequatur placeat.
+            Passionate instructor dedicated to providing high-quality education
+            and training in my field. With 1 years of
+            experience, I strive to inspire and empower students to reach their
+            full potential.
           </p>
         </div>
       </article>

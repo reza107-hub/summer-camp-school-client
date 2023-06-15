@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import InstructorCards from "../../Components/InstractorCards/InstractorCards";
-import { Link } from "react-router-dom";
 
 const Instructors = () => {
     const { data: instructors = [] } = useQuery({
@@ -23,17 +22,6 @@ const Instructors = () => {
               instructor={instructor}
             ></InstructorCards>
           ))}
-        </div>
-        <div className="flex justify-center mt-20">
-          {instructors?.length > 6 ? (
-            <Link to={"/instructors"}>
-              <button className="btn btn-primary btn-outline normal-case">
-                See More
-              </button>
-            </Link>
-          ) : (
-            <></>
-          )}
         </div>
       </section>
     );
