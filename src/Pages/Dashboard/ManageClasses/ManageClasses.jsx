@@ -2,6 +2,7 @@ import axios from "axios";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
 import { useRef, useState } from "react";
+import Swal from "sweetalert2";
 
 const ManageClasses = () => {
   const feedbackRef = useRef();
@@ -24,7 +25,11 @@ const ManageClasses = () => {
       )
       .then((res) => {
         if (res.data.modifiedCount) {
-          alert("status updated");
+          Swal.fire({
+            title: "Course Approved",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
         }
       });
   };
@@ -36,7 +41,10 @@ const ManageClasses = () => {
       )
       .then((res) => {
         if (res.data.modifiedCount) {
-          alert("status updated");
+          Swal.fire({
+            title: "Course Denied",
+            confirmButtonText: "OK",
+          });
         }
       });
   };
@@ -49,7 +57,11 @@ const ManageClasses = () => {
       )
       .then((res) => {
         if (res.data.modifiedCount) {
-          alert("feedback done");
+          Swal.fire({
+            title: "Feedback Done",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
         }
       });
   };
@@ -106,7 +118,10 @@ const ManageClasses = () => {
                     }
                     onClick={() => handleApprove(course?._id)}
                     className={`btn btn-accent btn-outline btn-xs border-0 ${
-                      course?.status === "denied" ? "btn-disabled" : ""
+                      course?.status === "denied" ||
+                      course?.status === "approved"
+                        ? "btn-disabled opacity-30"
+                        : ""
                     }`}
                   >
                     Approve
@@ -119,7 +134,10 @@ const ManageClasses = () => {
                     }
                     onClick={() => handleDenied(course?._id)}
                     className={`btn btn-accent btn-outline btn-xs border-0 ${
-                      course?.status === "denied" ? "btn-disabled" : ""
+                      course?.status === "denied" ||
+                      course?.status === "approved"
+                        ? "btn-disabled opacity-30"
+                        : ""
                     }`}
                   >
                     Deny

@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Login.css";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import GoogleSignIn from "../Shared/GoogleSignIn/GoogleSignIn";
+import Swal from "sweetalert2";
 const Login = () => {
-  // TODO: password validation
+  const navigate = useNavigate();
   const { signIn } = useAuth();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const {
@@ -16,10 +17,19 @@ const Login = () => {
   const onSubmit = (data) => {
     signIn(data.email, data.password)
       .then((result) => {
-        alert(result.user.displayName);
+        Swal.fire({
+          title: `Welcome Back ${result.user.displayName}`,
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        navigate('/')
       })
       .catch((err) => {
-        alert(err.message);
+        Swal.fire({
+          title: `${err.message}`,
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       });
   };
 

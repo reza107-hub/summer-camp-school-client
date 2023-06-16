@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import axios from "axios";
 import GoogleSignIn from "../Shared/GoogleSignIn/GoogleSignIn";
+import Swal from "sweetalert2";
 const img_hosting_token = import.meta.env.VITE_imgbb;
 
 const SignUp = () => {
@@ -12,6 +13,7 @@ const SignUp = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
+  const navigate= useNavigate()
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -60,14 +62,24 @@ const SignUp = () => {
             )
             .then((res) => {
               if (res.data.insertedId) {
-                // TODO
+                Swal.fire({
+                  title: "Signup Successful",
+                  icon: "success",
+                  confirmButtonText: "OK",
+                });
               }
             });
-          alert(result.user.displayName);
-          updateUserProfile(data.name, imgResponse).then(() => {});
+          console.log(result.user);
+          updateUserProfile(data.name, imgResponse).then(() => {
+            navigate("/");
+          });
         })
         .catch((err) => {
-          alert(err.message);
+          Swal.fire({
+            title: `${err.message}`,
+            icon: "error",
+            confirmButtonText: "OK",
+          });
         });
     }
   };

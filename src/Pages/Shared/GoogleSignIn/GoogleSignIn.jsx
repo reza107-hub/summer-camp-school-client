@@ -1,8 +1,11 @@
 import axios from "axios";
 import useAuth from "../../../Hooks/useAuth";
 import "./GoogleSignIn.css";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const GoogleSignIn = () => {
+  const navigate = useNavigate()
   const { googleSignIn } = useAuth();
   const handleGoogleLogin = () => {
     googleSignIn()
@@ -19,12 +22,21 @@ const GoogleSignIn = () => {
           )
           .then((res) => {
             if (res.data.insertedId) {
-              // TODO
+              Swal.fire({
+                title: "Login Successful",
+                icon: "success",
+                confirmButtonText: "OK",
+              });
             }
           });
+          navigate('/')
       })
       .catch((err) => {
-        alert(err.message);
+        Swal.fire({
+          title: `${err.message}`,
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       });
   };
   return (

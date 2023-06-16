@@ -2,6 +2,7 @@ import axios from "axios";
 import useAuth from "../../../Hooks/useAuth";
 import AddClassForm from "./AddClassForm";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 const img_hosting_token = import.meta.env.VITE_imgbb;
 
 const AddClass = () => {
@@ -44,7 +45,10 @@ const AddClass = () => {
         )
         .then((res) => {
           if (res.data.insertedId) {
-            alert("class added");
+            Swal.fire({
+              title: "Class Added",
+              icon: "success",
+            });
           }
         });
     }

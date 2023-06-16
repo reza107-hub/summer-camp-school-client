@@ -84,7 +84,7 @@ const ManageUsers = () => {
                       disabled={user.role}
                       onClick={() => handleMakeInstructor(user)}
                       className={`btn btn-outline btn-accent btn-xs border-0 normal-case  text-white ${
-                        user.role ? "btn-disabled" : ""
+                        user.role ? "btn-disabled opacity-30" : ""
                       }`}
                     >
                       make <br /> Instructor
@@ -99,7 +99,7 @@ const ManageUsers = () => {
                       disabled={user.role}
                       onClick={() => handleMakeAdmin(user)}
                       className={`btn btn-outline btn-accent btn-xs border-0 normal-case  text-white ${
-                        user.role ? "btn-disabled" : ""
+                        user.role ? "btn-disabled opacity-30" : ""
                       }`}
                     >
                       Make <br /> Admin

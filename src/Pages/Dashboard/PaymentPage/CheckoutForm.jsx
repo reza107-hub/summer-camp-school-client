@@ -3,6 +3,7 @@ import "./CheckoutForm.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 const CheckoutForm = ({ price, course }) => {
   const { user } = useAuth();
   const stripe = useStripe();
@@ -10,7 +11,6 @@ const CheckoutForm = ({ price, course }) => {
   const [cardError, setCardError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
-  const [transactionId, setTransactionId] = useState("");
   useEffect(() => {
     if (price > 0) {
       axios
@@ -63,7 +63,12 @@ const CheckoutForm = ({ price, course }) => {
     setProcessing(false);
 
     if (paymentIntent.status === "succeeded") {
-      setTransactionId(paymentIntent.id);
+      Swal.fire({
+        title: "Payment Successful",
+        text: `transactionId: ${paymentIntent.id}`,
+        icon: "success",
+        confirmButtonText: "OK",
+      });
       const payment = {
         email: user?.email,
         transaction_Id: paymentIntent.id,
@@ -84,9 +89,7 @@ const CheckoutForm = ({ price, course }) => {
           payment
         )
         .then((res) => {
-          if (res.data.insertedId) {
-            alert("Payment Successful");
-          }
+          console.log(res);
         });
     }
   };
@@ -118,11 +121,6 @@ const CheckoutForm = ({ price, course }) => {
         </button>
       </form>
       {cardError && <p className="text-red-600 ml-8">{cardError}</p>}
-      {transactionId && (
-        <p className="text-green-500">
-          Transaction complete with transactionId: {transactionId}
-        </p>
-      )}
     </div>
   );
 };
