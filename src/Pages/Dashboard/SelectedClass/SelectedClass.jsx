@@ -8,7 +8,7 @@ const SelectedClass = () => {
 
   const handleDelete = async (Id) => {
     const res = await axios.delete(
-      `http://localhost:5000/selectedcourse/${Id}?email=${user?.email}`
+      ` https://summer-camp-school-server-roan.vercel.app/selectedcourse/${Id}?email=${user?.email}`
     );
 
     refetch();

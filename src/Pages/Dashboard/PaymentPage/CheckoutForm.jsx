@@ -14,7 +14,10 @@ const CheckoutForm = ({ price, course }) => {
   useEffect(() => {
     if (price > 0) {
       axios
-        .post("http://localhost:5000/create-payment-intent", { price })
+        .post(
+          " https://summer-camp-school-server-roan.vercel.app/create-payment-intent",
+          { price }
+        )
         .then((res) => {
           setClientSecret(res.data.clientSecret);
         });
@@ -75,11 +78,16 @@ const CheckoutForm = ({ price, course }) => {
         enrolledStudents: course?.enrolledStudents,
         date: new Date(),
       };
-      axios.post("http://localhost:5000/payments", payment).then((res) => {
-        if (res.data.insertedId) {
-          alert("Payment Successful");
-        }
-      });
+      axios
+        .post(
+          " https://summer-camp-school-server-roan.vercel.app/payments",
+          payment
+        )
+        .then((res) => {
+          if (res.data.insertedId) {
+            alert("Payment Successful");
+          }
+        });
     }
   };
   return (

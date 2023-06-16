@@ -37,11 +37,16 @@ const AddClass = () => {
     data.enrolledStudents = 0;
     console.log(data);
     if (imgResponse) {
-      axios.post("http://localhost:5000/courses", data).then((res) => {
-        if (res.data.insertedId) {
-          alert("class added");
-        }
-      });
+      axios
+        .post(
+          " https://summer-camp-school-server-roan.vercel.app/courses",
+          data
+        )
+        .then((res) => {
+          if (res.data.insertedId) {
+            alert("class added");
+          }
+        });
     }
   };
   return (

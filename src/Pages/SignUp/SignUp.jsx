@@ -53,11 +53,16 @@ const SignUp = () => {
             email: data.email,
             image: imgResponse,
           };
-          axios.post("http://localhost:5000/users", saveUser).then((res) => {
-            if (res.data.insertedId) {
-              // TODO
-            }
-          });
+          axios
+            .post(
+              " https://summer-camp-school-server-roan.vercel.app/users",
+              saveUser
+            )
+            .then((res) => {
+              if (res.data.insertedId) {
+                // TODO
+              }
+            });
           alert(result.user.displayName);
           updateUserProfile(data.name, imgResponse).then(() => {});
         })

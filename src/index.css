@@ -7,3 +7,14 @@
 .font-raleway {
   font-family: "Raleway", sans-serif;
 }
+
+.light-theme {
+    background-color: #ffffff;
+    color: #333333;
+  }
+
+  .dark-theme {
+    background-color: #1f1f1f;
+    color: #ffffff;
+  }
+

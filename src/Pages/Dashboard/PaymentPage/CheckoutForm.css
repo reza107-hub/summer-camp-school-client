@@ -41,7 +41,7 @@ html {
   margin-top: 10px;
 }
 
-button:hover {
+.button:hover {
   color: #fff;
   cursor: pointer;
   background-color: #7795f8;
@@ -49,7 +49,7 @@ button:hover {
   box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
-button[disabled] {
+.button[disabled] {
   opacity: 0.6;
 }
 
@@ -90,7 +90,7 @@ input::placeholder {
   color: #666ee8;
 }
 
-/* 
+/*
 The StripeElement class is applied to the Element container by default.
 More info: https://stripe.com/docs/stripe-js/reference#element-options
 */

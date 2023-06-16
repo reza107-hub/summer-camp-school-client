@@ -8,7 +8,7 @@ const MyClasses = () => {
     queryKey: ["courses"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/instructorcourses/${user?.email}`
+        ` https://summer-camp-school-server-roan.vercel.app/instructorcourses/${user?.email}`
       );
       return res.json();
     },
@@ -26,7 +26,9 @@ const MyClasses = () => {
               <th>Available Seats</th>
               <th>Price</th>
               <th>Status</th>
-              <th>Enrolled <br /> Students</th>
+              <th>
+                Enrolled <br /> Students
+              </th>
               <th>Feedback</th>
             </tr>
           </thead>

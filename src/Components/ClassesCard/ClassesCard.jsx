@@ -14,7 +14,7 @@ const ClassesCard = ({ course }) => {
     queryKey: ["selectedCourses"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/selectedcourse?email=${user?.email}`
+        ` https://summer-camp-school-server-roan.vercel.app/selectedcourse?email=${user?.email}`
       );
       return res.json();
     },
@@ -25,7 +25,7 @@ const ClassesCard = ({ course }) => {
     queryKey: ["enrolledCourse"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/payments?email=${user?.email}`
+        ` https://summer-camp-school-server-roan.vercel.app/payments?email=${user?.email}`
       );
       return res.json();
     },
@@ -43,7 +43,10 @@ const ClassesCard = ({ course }) => {
     course.email = user?.email;
 
     axios
-      .post(`http://localhost:5000/selectedcourse`, course)
+      .post(
+        ` https://summer-camp-school-server-roan.vercel.app/selectedcourse`,
+        course
+      )
       .then((response) => {
         console.log(response);
         Swal.fire({
@@ -86,8 +89,8 @@ const ClassesCard = ({ course }) => {
         course?.availableSeats === 0 ? "bg-red-500" : ""
       }`}
       // Add animation properties here
-      whileHover={{ scale: [null, 1.2, 1.1] }}
-      transition={{ duration: 0.3 }}
+      whileHover={{ scale: [null, 0.9, 1.0] }}
+      transition={{ duration: 0.7 }}
     >
       {/* Rest of the component */}
       <div

@@ -9,7 +9,9 @@ const ManageClasses = () => {
   const { data: courses = [] } = useQuery({
     queryKey: ["courses"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/courses");
+      const res = await fetch(
+        " https://summer-camp-school-server-roan.vercel.app/courses"
+      );
       return res.json();
     },
   });
@@ -17,7 +19,9 @@ const ManageClasses = () => {
   const handleApprove = (id) => {
     console.log(id);
     axios
-      .patch(`http://localhost:5000/courses/${id}?status=approved`)
+      .patch(
+        ` https://summer-camp-school-server-roan.vercel.app/courses/${id}?status=approved`
+      )
       .then((res) => {
         if (res.data.modifiedCount) {
           alert("status updated");
@@ -27,7 +31,9 @@ const ManageClasses = () => {
 
   const handleDenied = (id) => {
     axios
-      .patch(`http://localhost:5000/courses/${id}?status=denied`)
+      .patch(
+        ` https://summer-camp-school-server-roan.vercel.app/courses/${id}?status=denied`
+      )
       .then((res) => {
         if (res.data.modifiedCount) {
           alert("status updated");
@@ -39,7 +45,7 @@ const ManageClasses = () => {
     console.log(id);
     axios
       .patch(
-        `http://localhost:5000/courses/${id}?feedback=${feedbackRef.current.value}`
+        ` https://summer-camp-school-server-roan.vercel.app/courses/${id}?feedback=${feedbackRef.current.value}`
       )
       .then((res) => {
         if (res.data.modifiedCount) {

@@ -3,16 +3,16 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useAuth from "../../../Hooks/useAuth";
 
 const EnrolledClasses = () => {
-    const {user} = useAuth()
-    const { data: enrolledCourse = [] } = useQuery({
-      queryKey: ["enrolledCourse"],
-      queryFn: async () => {
-        const res = await fetch(
-          `http://localhost:5000/payments?email=${user?.email}`
-        );
-        return res.json();
-      },
-    });
+  const { user } = useAuth();
+  const { data: enrolledCourse = [] } = useQuery({
+    queryKey: ["enrolledCourse"],
+    queryFn: async () => {
+      const res = await fetch(
+        ` https://summer-camp-school-server-roan.vercel.app/payments?email=${user?.email}`
+      );
+      return res.json();
+    },
+  });
   return (
     <div>
       <SectionTitle heading={"Enrolled Classes"}></SectionTitle>

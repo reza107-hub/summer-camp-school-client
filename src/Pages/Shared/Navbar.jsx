@@ -2,7 +2,8 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useAdmin from "../../Hooks/useAdmin";
 import useInstructor from "../../Hooks/useInstructor";
-const Navbar = ({ loggedIn, userProfilePicture }) => {
+import "./Navbar.css";
+const Navbar = ({ loggedIn, userProfilePicture, toggleTheme, isDarkTheme }) => {
   const { logOut } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
@@ -26,7 +27,9 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            isActive ? "text-accent font-bold" : ""
+            isActive
+              ? "text-accent font-bold"
+              : `${isDarkTheme ? "text-white" : ""}`
           }
           to="/"
         >
@@ -36,7 +39,9 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            isActive ? "text-accent font-bold" : ""
+            isActive
+              ? "text-accent font-bold"
+              : `${isDarkTheme ? "text-white" : ""}`
           }
           to="/instructors"
         >
@@ -46,7 +51,9 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            isActive ? "text-accent font-bold" : ""
+            isActive
+              ? "text-accent font-bold"
+              : `${isDarkTheme ? "text-white" : ""}`
           }
           to="/classes"
         >
@@ -58,7 +65,9 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive ? "text-accent font-bold" : ""
+                isActive
+                  ? "text-accent font-bold"
+                  : `${isDarkTheme ? "text-white" : ""}`
               }
               to={getDashboardLink()}
             >
@@ -67,11 +76,24 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
           </li>
         </>
       )}
+
+      <li>
+        <label className="ui-switch">
+          <input onClick={toggleTheme} type="checkbox" />
+          <div className="slider">
+            <div className="circle"></div>
+          </div>
+        </label>
+      </li>
     </>
   );
 
   return (
-    <nav className="navbar bg-white fixed z-10 text-black">
+    <nav
+      className={`navbar  fixed z-10  ${
+        isDarkTheme ? "dark-theme" : "bg-white text-black"
+      }`}
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -113,7 +135,9 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
         {!loggedIn && (
           <Link
             to={"/login"}
-            className="btn btn-outline text-black font-bold normal-case btn-sm"
+            className={`btn btn-outline text-black font-bold normal-case btn-sm ${
+              isDarkTheme ? "text-white" : ""
+            }`}
           >
             Login
           </Link>
@@ -130,7 +154,9 @@ const Navbar = ({ loggedIn, userProfilePicture }) => {
             </div>
             <button
               onClick={handleLogOut}
-              className="btn btn-outline text-black font-bold normal-case btn-sm ml-5"
+              className={`btn btn-outline text-black font-bold normal-case btn-sm ml-5 ${
+                isDarkTheme ? "text-white" : ""
+              }`}
             >
               log out
             </button>

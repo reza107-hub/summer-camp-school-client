@@ -12,11 +12,16 @@ const GoogleSignIn = () => {
           email: result.user?.email,
           image: result.user?.photoURL,
         };
-        axios.post("http://localhost:5000/users", saveUser).then((res) => {
-          if (res.data.insertedId) {
-            // TODO
-          }
-        });
+        axios
+          .post(
+            " https://summer-camp-school-server-roan.vercel.app/users",
+            saveUser
+          )
+          .then((res) => {
+            if (res.data.insertedId) {
+              // TODO
+            }
+          });
       })
       .catch((err) => {
         alert(err.message);
