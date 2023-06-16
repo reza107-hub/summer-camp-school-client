@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useAuth from "../../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const EnrolledClasses = () => {
   const { user } = useAuth();
@@ -15,6 +16,9 @@ const EnrolledClasses = () => {
   });
   return (
     <div>
+      <Helmet>
+        <title>CampSporty | Enrolled Classes</title>
+      </Helmet>
       <SectionTitle heading={"Enrolled Classes"}></SectionTitle>
       <div className="overflow-x-auto">
         <table className="table">

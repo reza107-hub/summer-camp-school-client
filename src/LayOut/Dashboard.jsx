@@ -4,6 +4,7 @@ import useInstructor from "../Hooks/useInstructor";
 import { FaUsersCog, FaRegAddressBook, FaInfo, FaPlus } from "react-icons/fa";
 import { GrCheckboxSelected } from "react-icons/gr";
 import { MdPayment, MdOutlineWorkHistory } from "react-icons/md";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
   const [isInstructor] = useInstructor();
@@ -11,6 +12,9 @@ const Dashboard = () => {
 
   return (
     <div className="drawer lg:drawer-open">
+      <Helmet>
+        <title>CampSporty | Dashboard</title>
+      </Helmet>
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center space-y-8">
         {/* Page content here */}
@@ -109,7 +113,8 @@ const Dashboard = () => {
                   }
                   to={"/dashboard/payment-history"}
                 >
-                  <MdOutlineWorkHistory className="text-white"/> Payment History
+                  <MdOutlineWorkHistory className="text-white" /> Payment
+                  History
                 </NavLink>
               </li>
             </>

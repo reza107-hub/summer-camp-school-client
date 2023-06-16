@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ClassesCard from "../../Components/ClassesCard/ClassesCard";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
+import { Helmet } from "react-helmet-async";
 
 const Classes = () => {
   const { data: courses = [] } = useQuery({
@@ -17,6 +18,9 @@ const Classes = () => {
   );
   return (
     <section className="pt-20 mb-10">
+      <Helmet>
+        <title>CampSporty | Classes</title>
+      </Helmet>
       <SectionTitle margin={true} heading={"All Classes"}></SectionTitle>
       <div className="mt-16 flex flex-col justify-center items-center md:grid md:grid-cols-3 container mx-auto gap-10 max-w-4xl">
         {filteredCourses.map((course) => (

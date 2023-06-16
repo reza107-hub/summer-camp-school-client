@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import InstructorCards from "../../Components/InstractorCards/InstractorCards";
+import { Helmet } from "react-helmet-async";
 
 const Instructors = () => {
   const { data: instructors = [] } = useQuery({
@@ -14,6 +15,9 @@ const Instructors = () => {
   });
   return (
     <section className="container mx-auto mb-16">
+      <Helmet>
+        <title>CampSporty | Instructors</title>
+      </Helmet>
       <div className="pt-20">
         <SectionTitle margin={true} heading={"All Instructor"}></SectionTitle>
       </div>

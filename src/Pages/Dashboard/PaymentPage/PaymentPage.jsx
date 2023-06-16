@@ -3,6 +3,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
 import useClasses from "../../../Hooks/useClasses";
+import { Helmet } from "react-helmet-async";
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_key);
 const PaymentPage = () => {
   const { id } = useParams();
@@ -11,6 +12,9 @@ const PaymentPage = () => {
   const price = course?.price ? course?.price : 0;
   return (
     <div>
+      <Helmet>
+        <title>CampSporty | Payment</title>
+      </Helmet>
       <Elements stripe={stripePromise}>
         <CheckoutForm price={price} course={course}></CheckoutForm>
       </Elements>

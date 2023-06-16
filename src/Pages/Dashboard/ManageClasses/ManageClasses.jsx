@@ -3,6 +3,7 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ManageClasses = () => {
   const feedbackRef = useRef();
@@ -68,6 +69,9 @@ const ManageClasses = () => {
 
   return (
     <>
+    <Helmet>
+        <title>CampSporty | Manage Classes</title>
+      </Helmet>
       <SectionTitle heading={"Manage Classes"}></SectionTitle>
       <div className="overflow-x-auto">
         <table className="table text-center">

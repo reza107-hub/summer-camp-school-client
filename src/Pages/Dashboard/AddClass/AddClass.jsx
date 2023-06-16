@@ -3,6 +3,7 @@ import useAuth from "../../../Hooks/useAuth";
 import AddClassForm from "./AddClassForm";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 const img_hosting_token = import.meta.env.VITE_imgbb;
 
 const AddClass = () => {
@@ -55,6 +56,9 @@ const AddClass = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>CampSporty | Add Class</title>
+      </Helmet>
       <AddClassForm
         displayName={user?.displayName}
         email={user?.email}

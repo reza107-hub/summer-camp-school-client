@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
+import { Helmet } from "react-helmet-async";
 
 const PaymentsHistory = () => {
   const { user } = useAuth();
@@ -15,6 +16,9 @@ const PaymentsHistory = () => {
   });
   return (
     <div>
+      <Helmet>
+        <title>CampSporty | Payment-History</title>
+      </Helmet>
       <SectionTitle heading={"Payment History"}></SectionTitle>
       <div className="overflow-x-auto">
         <table className="table">
